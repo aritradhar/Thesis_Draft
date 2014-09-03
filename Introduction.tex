@@ -18,14 +18,64 @@ patch based on that. Java supports two types of exceptions :
   declaration at the method declaration or \emph{try-catch} block by the
   developers. Such exceptions are handled carefully as they often involves
   accessing resources like network, database, file system, I/O etc.
+  Listing~\ref{checkedexception} and~\ref{checkedexception1} is an example of a
+  checked exception type when one needs to read userinput from the console.
   
   \item \textbf{Unchecked exception} which does not enforce similar handing
   mechanism as the former one. \emph{java.lang.RuntimeException} and its
   subclasses and \emph{java.lang.Error} are types of unchecked exceptions.
   \emph{NullPointerException}, \emph{ArrayIndexOutOfBound},
   \emph{ArithmeticException} are examples of common java runtime exceptions.
+  Listing~\ref{uncheckedexception} is an eample where the method returns an
+  integer after performing division operation. If the denominator is zero then
+  this operation will throw an \emph{ArithmeticException} \emph{divide-by-zero}.
+  But as arithmetic exception is a runtime exception and which is a unchecked
+  exception, we do not need to write a throw keyword or put try-catch block.
   
 \end{itemize}
+
+\onehalfspacing
+\lstset{language=Java, caption=Example 1 of java checked exception,
+label=checkedexception}
+\begin{lstlisting}
+void foo() throws IOException
+{
+ InputStremReader is = new InputStremReader(System.in);
+ BufferedReader br = new BufferedReader(is);
+ String str = br.readline();
+}
+\end{lstlisting}
+
+
+\lstset{language=Java, caption=Example 2 of java checked exception ,
+label=checkedexception1}
+\begin{lstlisting}
+void foo()
+{
+ try
+ {
+  InputStremReader is = new InputStremReader(System.in);
+  BufferedReader br = new BufferedReader(is);
+  String str = br.readline();
+ }
+ catch(IOException ex)
+ {
+  System.err.println("IO Exception happend");
+ }
+}
+
+\end{lstlisting}
+
+\lstset{language=Java, caption=Example of java unchecked exception,
+label=uncheckedexception}
+\begin{lstlisting}
+int foo(int a, int b)
+{
+ return a/b;
+}
+\end{lstlisting}
+
+\doublespacing
 
 Oracle official documentation says that ``\emph{Here's the bottom line
 guideline: If a client can reasonably be expected to recover from an exception,
