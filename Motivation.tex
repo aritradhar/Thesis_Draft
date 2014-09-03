@@ -3,7 +3,6 @@
 \label{chapter:motivation}
 
 
-
 \section{Historical Context}
 \label{section:historicalContext}
 
@@ -31,8 +30,13 @@ of some very common runtime exceptions.
   \item Near-blackout of the national grid in Austria caused by faulty function
   call.
   
-  
 \end{itemize}
+
+All of these incidents have one thing common, all of them were critical system
+where availability is the major requirement. Most of the systems are such
+critical that in case of failure one can not simple shutdown and restart the
+system like general client applications as it may results in loss of human lives
+and massive amount of money.
 
 \section{Data from Stack Overflow Posts}
 \label{section:stackoverflow}
@@ -85,8 +89,6 @@ MirroredTypesException & $1$ & $0.0015\%$ \\ \hline
 \end{tabular}
 \end{table}
 
-
-
 We have analyzed data from stack overflow and we looked for java runtime
 exception which are discussed most frequently. In the
 table~\ref{tab:stackoverlow}, the data we find is tabulated along with their
@@ -96,3 +98,7 @@ occurrences and percentages.
 From the table it is clear that null pointer exception in java is not only the
 most frequent but also the most dominant runtime exception having shere of more
 than $50\%$.
+
+\section{Major Challenges}
+\label{section:challenges}
+

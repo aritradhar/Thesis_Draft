@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Thesis_Draft</name>
+	<name>Thesis_draft</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>net.sourceforge.texlipse.builder.TexlipseNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>.tex</name>
-			<type>1</type>
-			<location>D:/Program Files/MiKTeX 2.9/tex/latex/tools/.tex</location>
-		</link>
-	</linkedResources>
 </projectDescription>
