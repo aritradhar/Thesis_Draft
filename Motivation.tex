@@ -96,10 +96,26 @@ occurrences and percentages.
 
 
 From the table it is clear that null pointer exception in java is not only the
-most frequent but also the most dominant runtime exception having shere of more
-than $50\%$.
+most frequent but also the most dominant runtime exception having share of more
+than $50\%$. This data is highly motivational for us as there are number of
+cases where Java developers encounters software bugs which are mostly based on
+runtime exception.
 
 \section{Major Challenges}
 \label{section:challenges}
 
+The challenges we faced during the research can be described in few points :
 
+\begin{enumerate}
+  \item The major challenge was that the program we try to patch, in all the
+  cases we actually don't know the internal logic of the program, we have
+  patched it based on its behavior which can be damaging to the system itself.
+  To prevent this we have tainted input variables which are coming from out side
+  environment and see how they are interacting with other variables and object
+  in the program. In case any of these variables go outside of the system, we
+  marked the path to make sure patch won't be applied along that path.
+  
+  \item Most of the patching are non-trivial in nature and adaptive based on the
+  use case to take full advantages what resources available in the code rather
+  than some deterministic patching technique.
+\end{enumerate}
