@@ -14,8 +14,39 @@
 \usepackage{hyperref}
 
 %\usepackage{natbib}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[]{datetime}
+%\usepackage{lipsum}
+\usepackage{graphicx}
 
-\usepackage[dvips]{graphicx}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{%frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers= left,
+	numbersep=6pt,
+	numberstyle=\small,
+  %frame=single,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=2
+	morecomment=[l]{//} 
+	escapeinside={<@}{@>}
+}
  % define the title
 
 
@@ -50,39 +81,43 @@
 
 \pagestyle{empty}
 \vspace*{7.1in} 
-Keywords: Social engineering, semantic attack, phishing, learning science, human computer interaction, trust, design and implementation, and real-world studies 
+Keywords: Software Engineering, Program Repairing, Availability, Program
+Analysis, Static Analysis, Exception
 
 \newpage
 
 \begin{center}
-\section*{Certificate}\label{section:certificate}
+\section*{Certificate}
+\label{section:certificate}
 \end{center}
 
-This is to certify that the thesis titled \textbf{``Title Title Title Title Title Title Title Title Title Title Title Title"} submitted by \textbf{Student Name} for the partial fulfillment of the requirements for the degree of \emph{Master of Technology} in \emph{Computer Science \& Engineering} is a record of the bonafide work carried out by her / him under my / our guidance and supervision in the Security and Privacy group at Indraprastha Institute of Information Technology, Delhi. This work has not been submitted anywhere else for the reward of any other degree. \\ \vspace{0.5in}
+This is to certify that the thesis titled \textbf{``Program Repairing using
+Exception Types, Constraint Automata and Typestatee"} submitted by
+\textbf{Aritra Dhar} for the partial fulfillment of the requirements for the
+degree of \emph{Master of Technology} in \emph{Computer Science \& Engineering}
+is a record of the bonafide work carried out by him under my guidance and
+supervision in the Security and Privacy group at Indraprastha Institute of
+Information Technology, Delhi. This work has not been submitted anywhere else
+for the reward of any other degree. \\ \vspace{0.5in}
 
-\textbf{Professor Advisor Name}\\
+\textbf{Dr. Rahul Purandare}\\
 \textbf{Indraprastha Institute of Information Technology, New Delhi}
-%\doublespacing
+\doublespacing
 
-\begin{abstract}
-
-XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX  
-
-\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Abstract
+\include{Abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 \pagestyle{empty}
 
-
 \newpage
 
-
-
-\section*{Acknowledgments}\label{section:acknowledgments}
-\pagestyle{plain}
-\pagenumbering{roman}
-
-XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Acknowledgments
+\include{Acknowledgments}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newpage
 
@@ -99,13 +134,29 @@ XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXXXXX XXX
 
 
 %\doublespacing
-
-\chapter{Introduction}\label{chapter:introduction}
-%\pagestyle{fancy}
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\onehalfspacing
-\cite{Perugini:2007:SOI:1240624.1240770}
+\doublespacing
+%\onehalfspacing
+
+
+% \chapter{Introduction}
+% \label{chapter:introduction}
+%\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Introduction
+\include{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\onehalfspacing
+
+\chapter{Motivation and Challenges}
+\label{chapter:motivation}
+\doublespacing
+
+
+
 
 
 %\newpage

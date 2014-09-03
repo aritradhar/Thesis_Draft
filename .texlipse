@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Wed Sep 03 10:41:15 IST 2014
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=MTech Thesis_Aritra Dhar.tex
+outputFile=MTech Thesis_Aritra Dhar.pdf
+langSpell=en
+markDer=true
+srcDir=
