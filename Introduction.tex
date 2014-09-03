@@ -40,6 +40,53 @@ which leads to shutdown or restart.
 
 We find out many applications where system shutdown/restart is expensive due to
 their nature.
+
+% \begin{figure}[!htb]
+% \centering
+% \includegraphics[width=3.3in]{images/ATC.jpg}
+% \caption{Air Traffic Controller (ATC) which controls several airplanes
+% simultaniously}
+% \label{fig:atc}
+% \end{figure}
+% 
+% \begin{tabular}{cc}
+% \subfloat{\includegraphics[width = 2in]{images/ATC.jpg}} &
+% \subfloat{\includegraphics[width = 2in]{images/UAV.jpg}} \\
+% \subfloat{\includegraphics[width = 2in]{images/ROVER.jpg}} &
+% \subfloat{\includegraphics[width = 2in]{images/LSS.jpg}}
+% \end{tabular}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{images/ATC.jpg}
+  \caption{Air Traffic Controller (ATC)}
+  \label{fig:sfigATC}
+\end{subfigure} %
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{images/UAV.jpg}
+  \caption{Unmanned Aerial Vehicle (UAV)}
+  \label{fig:sfigUAV}
+\end{subfigure} 
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{images/ROVER.jpg}
+  \caption{Mars Rover}
+  \label{fig:sfigROVER}
+\end{subfigure} %
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width= 0.9\linewidth]{images/LSS.jpg}
+  \caption{Life Support System}
+  \label{fig:sfigLSS}
+\end{subfigure} 
+
+\caption{Several Realtime Critical Applications}
+\label{fig:fig}
+\end{figure}
+
 Notable examples are air traffic control, auto pilot, life support system, smart
 power grids, telephone networks, robots like UAV and rovers deployed for
 surveillance, reconnaissance and knowledge acquisition in remote locations etc.
