@@ -6,7 +6,7 @@
 Exception handling attributes to the response of program during runtime to some
 exceptional condition encounter. Most of the time it changes normal flow of
 program. In many cases exception handling is natural part of software execution
-due to the nature of the software.
+due to the nature of the software~\cite{JavaException}.
 An application which constantly accesses I/O which also includes share resources
 may throw exception if another application blocks it.
 Here in this paper we discuss and analyze java exceptions and produce repair
@@ -22,8 +22,9 @@ patch based on that. Java supports two types of exceptions :
   checked exception type when one needs to read userinput from the console.
   
   \item \textbf{Unchecked exception} which does not enforce similar handing
-  mechanism as the former one. \emph{java.lang.RuntimeException} and its
-  subclasses and \emph{java.lang.Error} are types of unchecked exceptions.
+  mechanism as the former one.
+  \emph{java.lang.RuntimeException}~\cite{RuntimeException} and its subclasses
+  and \emph{java.lang.Error}~\cite{JavaError} are types of unchecked exceptions.
   \emph{NullPointerException}, \emph{ArrayIndexOutOfBound},
   \emph{ArithmeticException} are examples of common java runtime exceptions.
   Listing~\ref{uncheckedexception} is an eample where the method returns an
