@@ -60,11 +60,14 @@ public class MainClass
 }
 \end{lstlisting}
 
-In the Example~\ref{example1}, we have given a piece of java code which shows multiple lines can throw several runtime exceptions. 
-In this example we consider three very common runtime exceptions: NullPointerException, ArrayIndexOutOfBoundExcepltion, NegetiveIndexException, 
-ArithmeticException (i.e. divide-by-zero). In rest of this section, this particular example will be used to demonstrate the repairing strategy.
+In the Example~\ref{example1}, we have given a piece of java code which shows
+multiple lines can throw several runtime exceptions.
+In this example we consider three very common runtime exceptions:
+NullPointerException, ArrayIndexOutOfBoundExcepltion, NegetiveIndexException,
+ArithmeticException (i.e. divide-by-zero). In rest of this section, this
+particular example will be used to demonstrate the repairing strategy.
 
-\section{Symbolic Analysis}
+\section{Static Analysis}
 \label{subsec:symb}
 
 
@@ -75,29 +78,47 @@ ArithmeticException (i.e. divide-by-zero). In rest of this section, this particu
 \label{fig:datadep}
 \end{figure}
 
-We have done several  static analysis a priori  over the Java source code to discover :
+We have done several  static analysis a priori  over the Java source code to
+discover :
 \begin{enumerate}
-	\item Critical section of the code which are not eligible for patching. Eg. banking or any financial transaction which should be crashed in case of 
-	exception as suboptimal solution due to patching will led it to inconsistent state.
-	\item Symbolic analysis of the program to discover potential points of failure and mark them.
-	\item Build data dependency graph which will be used to generate appropriate code slice to be used as patch. 
-	In Figure~\ref{fig:datadep}, the data dependency graph of the example code~\ref{example1} is presented.
-	\item The symbolic analysis will also reveal which kind of exception is likely to happened at the time of execution. 
-	This information is necessary at the time of instrumenting the patch as it will determine the catch block.
-	
+  
+  \item Critical section of the code which are not eligible for patching. Eg.
+  banking or any financial transaction which should be crashed in case of
+  exception as suboptimal solution due to patching will led it to inconsistent
+  state. This information will be available from the taint analysis module which
+  will take place before the repairing module.
+  
+  \item We also analyze all the methods for method specific shilding as they can
+  be called from the paths leading to both tainted sink and non tainted sink.
+  The detailed description is available in Section~\ref{MethodShilding}.
+  
+  \item Static analysis of the program to discover potential points of failure and
+  mark them.
+  
+  \item Build data dependency graph which will be used to generate appropriate
+  code slice to be used as patch.
+  In Figure~\ref{fig:datadep}, the data dependency graph of the example
+  code~\ref{example1} is presented.
+  
+  \item The static analysis will also reveal which kind of exception is likely to
+  happened at the time of execution.
+  This information is necessary at the time of instrumenting the patch as it will
+  determine the catch block.
+  
 \end{enumerate}
 
 \section{Data set for Successful Program Runs}
 \label{subsec:progrun}
 
-Here we will store all the traces of successful program runs.
-\begin{figure}[!htb]
+
+\begin{figure}
 \centering
-\includegraphics[width=5.0in]{images/succrun.pdf}
+\includegraphics[width=4.0in]{images/succrun.pdf}
 \caption{Indexed global variables and method arguments successful runs}
 \label{fig:succrun}
 \end{figure}
 
+Here we stored all the traces of successful program runs.
 Figure~\ref{fig:succrun} shows such indexed traces of all the global variables and method arguments. 
 We store the snapshots of these objects. We won't store local variables as they can always be regenerated. 
 As it is required to capture the snapshot of all these variable, we made deep cone of all of these objects and variables. 
