@@ -19,7 +19,8 @@ of some very common runtime exceptions.
   commutation blackout.
   
   \item Air-Traffic Control System in LA Airport lost communication with all 400
-  airplanes caused by a system crash triggered by integer (32bit) overflow.
+  airplanes caused by a system crash triggered by integer (32bit)
+  overflow~\cite{LAATC}.
   
   \item Mars rover curiosity B-side computer memory overflow causing OS suspend
   and multiple restart.
@@ -43,8 +44,6 @@ and massive amount of money.
 
 \begin{table}[h]
 \centering
-\caption{Most frequent java runtime exceptions from stack overflow data}
-\label{tab:stackoverlow}
 \begin{tabular}{|c|c|c|}
 \hline
 \textbf{Runtime Exception Type} & \textbf{Occurrences} & \textbf{Percentage}\\
@@ -87,6 +86,8 @@ NoSuchMechanismException & $3$ & $0.0045\%$ \\ \hline
 MirroredTypesException & $1$ & $0.0015\%$ \\ \hline
 
 \end{tabular}
+\caption{Most frequent java runtime exceptions from stack overflow data}
+\label{tab:stackoverlow}
 \end{table}
 
 We have analyzed data from stack overflow and we looked for java runtime

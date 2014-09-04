@@ -21,6 +21,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -47,8 +48,7 @@
 	escapeinside={<@}{@>}
 }
  % define the title
-
-
+ 
 % Paper conservation layout. Long live the trees!!
 \setlength{\oddsidemargin}{-0.4mm} % 25 mm left margin
 \setlength{\evensidemargin}{\oddsidemargin}
@@ -57,8 +57,7 @@
 \setlength{\headheight}{5mm}
 \setlength{\headsep}{5mm}
 \setlength{\footskip}{10mm}
-\setlength{\textheight}{230mm}     % 20 mm bottom margin
-
+\setlength{\textheight}{225mm}     % 20 mm bottom margin
 
 \setlength{\parskip}{1ex}
 \parindent 0in
@@ -68,12 +67,13 @@
 % \def\SATHREE{Specific Aim 3}
 % \def\SAFOUR{Specific Aim 4}
 
+\renewcommand\lstlistingname{Code Snippets}
+\renewcommand\lstlistlistingname{Lost of Code Snippets}
+
 \def\title{Mytitle}
 %\def\titletwo{Thesis Proposal Title Line 2}
 
 \begin{document}
-
-
 
 \include{mtech_thesis_cover}
 
@@ -81,8 +81,8 @@
 
 \pagestyle{empty}
 \vspace*{7.1in} 
-Keywords: Software Engineering, Program Repairing, Availability, Program
-Analysis, Static Analysis, Exception
+\textbf{Keywords}: Software Engineering, Program Repairing, Availability,
+Program Analysis, Static Analysis, Exception
 
 \newpage
 

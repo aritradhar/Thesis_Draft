@@ -38,3 +38,12 @@ x86 binaries without requiring any source code. They used invariants analysis fo
 which they used Daikon~\cite{DBLP:journals/scp/ErnstPGMPTX07}. They mostly
 patched security vulnerabilities by some candidate repair patches.
 
+Fan Lon et al in their paper~\cite{DBLP:conf/pldi/LongSR14} presented their new
+system \emph{RCV} which recovers applications from divide-by-zero and
+null-deference error. Their tool replaces \emph{SIGFPE} and \emph{SIGSEGV}
+signal handler with its own handler. The approach simply works by assigning
+zero at the time of divi-by-zero error, read zero and ignores write at the time
+of null-deference error. Their implementation was on x86 and x86-64 binaries and
+they also implemented a dynamic taint analysis to see the effect of their
+patching until the program stabilizes.
+
