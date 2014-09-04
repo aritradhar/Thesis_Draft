@@ -74,7 +74,7 @@ particular example will be used to demonstrate the repairing strategy.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=3.3in]{images/depG.pdf}
-\caption{Data dependency graph of the variables in Example\ref{example1}}
+\caption{Data dependency graph of the variables in code snippet~\ref{example1}}
 \label{fig:datadep}
 \end{figure}
 
@@ -97,8 +97,8 @@ discover :
   
   \item Build data dependency graph which will be used to generate appropriate
   code slice to be used as patch.
-  In Figure~\ref{fig:datadep}, the data dependency graph of the example
-  code~\ref{example1} is presented.
+  In Figure~\ref{fig:datadep}, the data dependency graph of the
+  code snippet~\ref{example1} is presented.
   
   \item The static analysis will also reveal which kind of exception is likely to
   happened at the time of execution.
@@ -154,7 +154,7 @@ runtime exception is $java.lang.ArrayIndexOutOfBound$. This will be used to prod
 \subsection{Determine Optimal Code Slice}
 
 The optimal code slice will be determined from the data dependency graph which was rendered at the time of static analysis mentioned in 
-Section~\ref{subsec:symb}. In the Listing~\ref{patchingexample1}, the example code snippet shows such code slice inside the catch block. 
+Section~\ref{subsec:symb}. In the code snippet~\ref{patchingexample1}, the example code snippet shows such code slice inside the catch block. 
 As the error occurred at the line $int\ temp5\ =\ this.arr3[temp3];$ the statements which produces the temp3 and the statement which also 
 involves $temp3$ or any other variables derived from $temp3$, would be included in the catch block for re-execution with the valued of the 
 same from the data table of previous successful runs.
