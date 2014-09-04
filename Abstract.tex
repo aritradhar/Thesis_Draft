@@ -1,7 +1,7 @@
 \begin{abstract}
 
 Runtime Exceptions are common types of exceptions which may lead to system crash
-which leads to shutdown or restart. For may critical application such scenario
+which results in shutdown or restart. For may critical application such scenario
 is unacceptable due to their nature which requires availability of the service.
 %Runtime exceptions may even leads to inconsistency of data in the system which
 % may leads to further complications and expensive fixes.
@@ -12,12 +12,17 @@ guide the program through some exception suppression procedure which will leads
 the program to a consistent state hence improve the chance of surviving a fatal
 crash. Here we consider such programs for which restart is not an option.
 
-In this paper, we present a novel technique to recover from unexpected runtime
+In our work, we present a novel technique to recover from unexpected runtime
 exceptions. We have used hybrid of two techniques for efficient detection of
 potential point of failure and patch it closest to that to minimize the damage.
 One technique uses type of runtime exception to apply appropriate patch. The
 other technique will provides typestate analysis technique which will detect
-typestate violations to apply the right patch.
+typestate violations to apply the right patch. We also performed static analysis
+to taint variables and object to make sure no patching is applied to those which
+leaves the system. We only patched those statements for which the
+associated variables and objects stay and die inside the program. The taint
+analysis phase is follwed by the repairing phase where we tried to apply the
+patch close to the point of exception thus minimizing the effect of exception.
 %The developer will flag a specific portion of the program to be eligible for repairing and patching.
  
 
