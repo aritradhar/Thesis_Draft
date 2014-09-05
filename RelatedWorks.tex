@@ -3,7 +3,7 @@
 \chapter{Related Works}
 \label{chapter:relatedWorks}
 
-\section{Recent Works on Data Structure repairing}
+\section{Recent Works on Data Structure Repairing}
 \label{sec:RecWorksDataStructure}
 
 Automated data-structure repairing techniques are there in the litarature for a
@@ -29,7 +29,7 @@ technique to some well known data structures like singly linked list, sorted
 list, doubly liked list, N-ary tree, AVL tree, binary search tree, disjoint set,
 red-black tree, Fibonacci heap etc.
 
-\section{Software Patching}
+\section{Works on Software Patching}
 \label{sec:RecWorksSoftPatch}
 
 In their paper~\cite{DBLP:conf/sosp/PerkinsKLABCPSSSWZER09}, authors Jeff H.
@@ -42,8 +42,17 @@ Fan Lon et al in their paper~\cite{DBLP:conf/pldi/LongSR14} presented their new
 system \emph{RCV} which recovers applications from divide-by-zero and
 null-deference error. Their tool replaces \emph{SIGFPE} and \emph{SIGSEGV}
 signal handler with its own handler. The approach simply works by assigning
-zero at the time of divi-by-zero error, read zero and ignores write at the time
-of null-deference error. Their implementation was on x86 and x86-64 binaries and
-they also implemented a dynamic taint analysis to see the effect of their
+zero at the time of divide-by-zero error, read zero and ignores write at the time
+of null-deference error. Their implementation was on $x86$ and $x86-64$
+binaries and they also implemented a dynamic taint analysis to see the effect of their
 patching until the program stabilizes.
 
+\section{Genetic Programming, Evolutionary Computation}
+\label{sec:RecWorksGeneric}
+
+Reserch works on program repair based on genetic programming and evolutionary
+computation can be found in the paper of Stephanie Forrest et
+al.~\cite{DBLP:conf/gecco/2009g} and Westley Weimer et
+al~\cite{DBLP:journals/cacm/WeimerFGN10} respectively. In the papers, the
+authors used genetic programming to generate and evaluate test cases. They used
+their technique on the well known Microsoft Zune media player bug.
