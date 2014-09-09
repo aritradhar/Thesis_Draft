@@ -3,10 +3,10 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 
-Exception handling attributes to the response of program during runtime to some
+Exception handling~\cite{JavaException} attributes to the response of program during runtime to some
 exceptional condition encounter. Most of the time it changes normal flow of
 program. In many cases exception handling is natural part of software execution
-due to the nature of the software~\cite{JavaException}.
+due to the nature of the software.
 An application which constantly accesses I/O which also includes share resources
 may throw exception if another application blocks it.
 Here in this paper we discuss and analyze java exceptions and produce repair
@@ -169,7 +169,7 @@ monitor without owning the specified monitor. Applications under adversarial
 situation should be considered where deliberate malicious input may cause it to
 fail. To recover from such situation, a mechanism is needed which can predict
 failure by doing invariant and symbolic analysis. Invariant analysis will detect
-particular variables outside legal/safe bound. Symbolic analysis will indicate
+particular variables outside legal/safe bound. Static analysis will indicate
 to the potential point of failure.
 
 
@@ -177,6 +177,16 @@ In this paper we proposed two solution to suppress runtime example and ensure
 system survivability. The approach consists of four primary phases
 
 \begin{itemize}
+  \item \textbf{Taint Analysis} : We performed static taint analysis to mark all
+  the program paths which lead to some tainted sink. The taint analysis goes
+  like the following : we marked such variables and objects which are coming
+  from outside world (like user input from web page or console), then we looked
+  for taint propagating methods by which the tainting can be propagated to some no
+  tainted variable or objects from some tainted ones. Then we also enlisted some
+  taint sink such as console out put or database commit, which indicates that
+  certain tainted variables or objects leaves the system. We marked such paths
+  and such statement which involved tainted variables/objects as patching on
+  such variables is not recommended.
   \item \textbf{Generate input data-set} : We index user input along with the
   global variables and method arguments of successful runs.
   The local variables are not indexed as they can be re-generated.

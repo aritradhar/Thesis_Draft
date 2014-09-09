@@ -45,7 +45,8 @@ signal handler with its own handler. The approach simply works by assigning
 zero at the time of divide-by-zero error, read zero and ignores write at the time
 of null-deference error. Their implementation was on $x86$ and $x86-64$
 binaries and they also implemented a dynamic taint analysis to see the effect of their
-patching until the program stabilizes.
+patching until the program stabilizes which they called as \emph{error
+shepherding}.
 
 \section{Genetic Programming, Evolutionary Computation}
 \label{sec:RecWorksGeneric}
