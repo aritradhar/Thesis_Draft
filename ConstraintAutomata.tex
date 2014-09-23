@@ -36,7 +36,9 @@ invariant violation.
 \section{Patching Techniques}
 \label{subsec:patchCA}
 
-The patching technique is based on the exception type. 
+The patching technique is based on the exception type. We instrument the
+patching code in a catch block keeping the original statement encapsulated in
+try block.
 
 \subsection{Array index out of bound exception}
 
