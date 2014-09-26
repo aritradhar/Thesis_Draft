@@ -58,17 +58,21 @@ method call.
 By using dataflow analysis we try to understand how these different variables
 are corelated and based on that how we can effectively apply patching technique
 so the patching code will have very less footprint in the instrumented bytecode.
+In the Section~\ref{subsec:boundedForward}, we have given detailed explanations
+of such analysis.
 
 \section{Flow Functions}
-\label{flowFunctions}
+\label{sec:flowFunctions}
 
-\begin{figure}[b]
+\begin{figure}[f]
 \centering
-\includegraphics[width=1.8in]{images/dataflow.png}
-\caption{Dataflow diagram with in, out set}
+\includegraphics[width=3.2in]{images/dataflow.png}
+\caption{Dataflow diagram with in, out set in forward analysis}
 \label{fig:dataflow}
 \end{figure}
 
+\subsection{Bounded Forward Analysis}
+\label{subsec:boundedForward}
 
 Let us define $p$ as a program point/ node in the control flow graph. $in(P)$
 and $out(P)$ respectively denotes in set and out set to and from the node $P$.
@@ -82,5 +86,5 @@ method $m \in IG$ and
 $$out(P) = in(P) \cap gen(P)$$ where statement in P is a invoke statement and
 method $m \in IU$. Initial entry set = ${\phi}$.
 
-In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG whin in set
+In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG with in set
 and out set.
