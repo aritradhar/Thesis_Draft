@@ -74,17 +74,17 @@ of such analysis.
 \subsection{Bounded Forward Analysis}
 \label{subsec:boundedForward}
 
-Let us define $p$ as a program point/ node in the control flow graph. $in(P)$
-and $out(P)$ respectively denotes in set and out set to and from the node $P$.
+Let us define $P_i$ as a program point/ node in the control flow graph. $in(P)$
+and $out(P_i)$ respectively denotes in set and out set to and from the node $P$.
 We define set $IG$ as the set of methods like \texttt{indexOf()},
 \texttt{codePointAt()}, \texttt{CodePointBefore()} etc. which returns an integer
 which can be used as input to other String methods. We also define set $IU$
 which contains the methods which may use the integers produced by the methods in
 $IG$ Then, 
-$$out(P) = in(P) \cup kill(P)$$ where statement in P is a invoke statement and
-method $m \in IG$ and
-$$out(P) = in(P) \cap gen(P)$$ where statement in P is a invoke statement and
-method $m \in IU$. Initial entry set = ${\phi}$.
+$$out(P_i) = in(P_i) \cup kill(P_i)$$ where statement in P is a invoke statement
+and method $m \in IG$ and
+$$out(P_i) = in(P_i) \cap gen(P_i)$$ where statement in P is a invoke statement
+and method $m \in IU$. Initial entry set = ${\phi}$.
 
 In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG with in set
 and out set.
