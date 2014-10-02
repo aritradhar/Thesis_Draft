@@ -81,10 +81,17 @@ We define set $IG$ as the set of methods like \texttt{indexOf()},
 which can be used as input to other String methods. We also define set $IU$
 which contains the methods which may use the integers produced by the methods in
 $IG$ Then, 
-$$out(P_i) = in(P_i) \cup kill(P_i)$$ where statement in P is a invoke statement
+$$out(P_i) = in(P_i) \cup Def(P_i)$$ where statement in P is a invoke statement
 and method $m \in IG$ and
-$$out(P_i) = in(P_i) \cap gen(P_i)$$ where statement in P is a invoke statement
+$$out(P_i) = in(P_i) \cap Used(P_i)$$ where statement in P is a invoke statement
 and method $m \in IU$. Initial entry set = ${\phi}$.
+
+
+We have defined $Def(P_i)$ set as the set of variables and objects which are
+defined or redefined in the program point $P_i$. The set $Used(P_i)$ is also a
+set of veriables and objects which are used in the program point $P_i$.
+
+
 
 In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG with in set
 and out set.
