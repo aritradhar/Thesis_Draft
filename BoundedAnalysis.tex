@@ -18,12 +18,12 @@ of the dataflow analysis are the following:
   
 \end{itemize}
 
-In the code snippet~\ref{dataflow}, we gave an example code based on java
+In the code snippet~\ref{snippet:dataflow}, we gave an example code based on java
 \emph{String} API to demonstrate the analysis.
 
 \onehalfspacing
 \lstset{language=Java, caption=Dataflow analysis,
-label=dataflow}
+label=snippet:dataflow}
 \begin{lstlisting}
 void bar()
 {
@@ -52,13 +52,14 @@ String API method i.e \texttt{indexOf()} which calculates index of starting of a
 sub-string or single character in the main string. In case the sub-string or the
 character does not exist in the main string, \texttt{indexOf()} method returns
 $-1$ which causes throwing a runtime exception in the \texttt{substring()}
-method call. mkjkj
+method call.
 \newline
 By using dataflow analysis we try to understand how these different variables
-are corelated and based on that how we can effectively apply patching technique
+are correlated and based on that how we can effectively apply patching technique
 so the patching code will have very less footprint in the instrumented bytecode.
 In the Section~\ref{subsec:boundedForward}, we have given detailed explanations
 of such analysis.
+
 
 \section{Flow Functions}
 \label{sec:flowFunctions}
@@ -98,3 +99,52 @@ as
 
 In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG with in set
 and out set.
+
+
+\section{Constraint Satisfaction}
+\label{sec:constraintSatisfaction}
+
+Dataflow analysis plays an important role in preparing the patching. One
+patching mechanism we have come up with \texttt{String} objects is tht by
+solving constraints which may come up in future will produce patch of better
+quality. More over, it is very easy to extend the solution to other objects type
+based on their API and characteristics of conditions. One such example is given
+in the following code snippet~\ref{snippet:constraintCheck}
+
+\onehalfspacing
+\lstset{language=Java, caption=Better patching mechanism with constraint
+satisfaction, label = snippet:constraintCheck}
+\begin{lstlisting}
+
+void foo(String s, int i, int j)
+{
+	String str = s.substring(i,j);
+	int j;
+	//some operation
+	if(str.length() > j){
+	  //do something..
+	}
+	Integer in = 0;
+	try{
+	  StreamReader isr = new InputStreamReader(System.in);
+	  String sin = new BufferedReader(isr).readLine();
+	  in = Integer.parseInt(sin);
+	}
+	catch(IOException ex){}
+	if(str.length() <= in){
+	  //do something..
+	}
+	if(str.startsWith(SomeStringObject)){
+	  //do something
+	}
+}
+
+\end{lstlisting}
+
+In the code snippet~\ref{snippet:constraintCheck}, the statement at line no $4$
+is \texttt{s.substring(i,j)}, which can throw a
+\texttt{IndexOutOfBoundsException}. This statement requires patching whic
+involves generating a string for the object reference \texttt{str}. But in the
+progrm, in line numbers \texttt{7, 16} and \texttt{20}, there are threee
+conditional statements on \texttt{str} which involves constraint on the length
+and the prefix of the string.
