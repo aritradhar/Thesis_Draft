@@ -64,9 +64,9 @@ of such analysis.
 \section{Flow Functions}
 \label{sec:flowFunctions}
 
-\begin{figure}[f]
+\begin{figure}[htb]
 \centering
-\includegraphics[width=3.2in]{images/dataflow.png}
+\includegraphics[width=3.2in]{images/dataflow.pdf}
 \caption{Dataflow diagram with in, out set in forward analysis}
 \label{fig:dataflow}
 \end{figure}
@@ -119,9 +119,8 @@ satisfaction, label = snippet:constraintCheck}
 void foo(String s, int i, int j)
 {
 	String str = s.substring(i,j);
-	int j;
 	//some operation
-	if(str.length() > j){
+	if(str.length() > 12){
 	  //do something..
 	}
 	Integer in = 0;
@@ -147,4 +146,30 @@ is \texttt{s.substring(i,j)}, which can throw a
 involves generating a string for the object reference \texttt{str}. But in the
 progrm, in line numbers \texttt{7, 16} and \texttt{20}, there are threee
 conditional statements on \texttt{str} which involves constraint on the length
-and the prefix of the string.
+and the prefix of the string. There may be some set of constraint which can be
+evaluated before hand, like the condition in in line numbers \texttt{7} which
+involve a constant integer. But there can be cases like the conditional
+statement in line numbers \texttt{16} which is also a lenght constraint like the
+former, but in involves another variable which is taken frrom console, i.e. the
+variable will be evaluated in run time. In such cases we can defer the
+constraint evaluation process for that paricular condition. We can evaluate all
+the conditions befor it, which can be safely evaluated. When we reach line
+number \texttt{16}, then the variable \texttt{tt} would be available and can be
+used to reevaluate the string \texttt{str}.
+
+\subsection{Constraint Storage}
+\label{subsec:constraintStorage}
+
+For each of the string object, we store in the way illustrated in the
+Figure~\ref{fig:constraint}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=6.5in]{images/constraint.pdf}
+\caption{String constraints storage format}
+\label{fig:constraint}
+\end{figure}
+
+Wen to evaluate a new string object we need bounds like the minimuma and maximum
+length, the prefixes and the candidate characters and their relative position.
+We keep minimum information to safely evaluate the string.
