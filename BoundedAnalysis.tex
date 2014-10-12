@@ -172,3 +172,49 @@ Figure~\ref{fig:constraint}.
 Wen to evaluate a new string object we need bounds like the minimuma and maximum
 length, the prefixes and the candidate characters and their relative position.
 We keep minimum information to safely evaluate the string.
+
+\subsection{Constraint Evaluation Strategy}
+\label{subsec:constraintStorage}
+
+\begin{algorithm}
+\DontPrintSemicolon
+\KwData{String object $Str$ and constraint set $CS$.}
+\KwResult{String object $Str$ such that $\forall i \in CS$, $Str$ satisfies $i$
+}
+\Begin
+{
+ $CS_{Str} \leftarrow$ Get the constrint set for $Str$\;
+ $MinLength \leftarrow CS_{Str}[0]$\;
+ $MaxLength \leftarrow CS_{Str}[1]$\;
+ $PrefixSet_{Str} \leftarrow CS_{Str}[2 \rightarrow MaxLength + 1]$\;
+ $ContainSet_{Str} \leftarrow CS_{Str}[MaxLength +2  \rightarrow 2*MaxLength
+ + 1]$\;
+ 
+  \For{$C \in PrefixSet_{Str}$}
+  {
+   \If{$C$ is Empty}
+   {
+    continue\;
+   }
+   $PrefixLength \leftarrow$ {\bf LENGTH OF} $C$\;
+   
+   \If{$PrefixLength$ is Maximum $\in PrefixSet_{Str}$}
+   {
+     Use $C$ to construct $Str$\;
+   }
+  }
+ 
+  \For{$C \in ContainSet_{Str}$}
+  {
+   \If{$C$ is Empty {\bf OR} $C \in Str$}
+   {
+    continue\;
+   }
+   $Str \leftarrow Str$ {\bf APPEND} $C$\;
+  }
+}
+\caption{String object constraint evaluation}
+ \label{algo:constraint}
+\end{algorithm}
+
+
