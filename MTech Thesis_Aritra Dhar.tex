@@ -14,6 +14,15 @@
 \usepackage{color}
 \usepackage{epstopdf}
 \usepackage[ruled,vlined]{algorithm2e}
+\usepackage[none]{hyphenat}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+\hyphenpenalty 10000
+\exhyphenpenalty 10000
+\sloppy
 
 \usepackage{hyperref}
 %\usepackage{natbib}
@@ -165,7 +174,7 @@ Program Analysis, Static Analysis, Exception
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CallGraph consruction
-\include{CallGraph}
+\include{TaintAnalysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

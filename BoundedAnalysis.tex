@@ -183,11 +183,11 @@ We keep minimum information to safely evaluate the string.
 }
 \Begin
 {
- $CS_{Str} \leftarrow$ Get the constrint set for $Str$\;
- $MinLength \leftarrow CS_{Str}[0]$\;
- $MaxLength \leftarrow CS_{Str}[1]$\;
- $PrefixSet_{Str} \leftarrow CS_{Str}[2 \rightarrow MaxLength + 1]$\;
- $ContainSet_{Str} \leftarrow CS_{Str}[MaxLength +2  \rightarrow 2*MaxLength
+ $CS_{Str} \longleftarrow$ Get the constrint set for $Str$\;
+ $MinLength \longleftarrow CS_{Str}[0]$\;
+ $MaxLength \longleftarrow CS_{Str}[1]$\;
+ $PrefixSet_{Str} \longleftarrow CS_{Str}[2 \rightarrow MaxLength + 1]$\;
+ $ContainSet_{Str} \longleftarrow CS_{Str}[MaxLength +2  \rightarrow 2*MaxLength
  + 1]$\;
  
   \For{$C \in PrefixSet_{Str}$}
@@ -196,7 +196,7 @@ We keep minimum information to safely evaluate the string.
    {
     continue\;
    }
-   $PrefixLength \leftarrow$ {\bf LENGTH OF} $C$\;
+   $PrefixLength \longleftarrow$ {\bf LENGTH OF} $C$\;
    
    \If{$PrefixLength$ is Maximum $\in PrefixSet_{Str}$}
    {
@@ -212,9 +212,11 @@ We keep minimum information to safely evaluate the string.
    }
    $Str \leftarrow Str$ {\bf APPEND} $C$\;
   }
+  return $Str$\;
 }
 \caption{String object constraint evaluation}
  \label{algo:constraint}
 \end{algorithm}
 
-
+\subsection{Repairing Strategy using Constraint Evaluation}
+\label{subsec:repairingStrategyConstraint}
