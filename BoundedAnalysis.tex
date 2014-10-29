@@ -220,3 +220,8 @@ We keep minimum information to safely evaluate the string.
 
 \subsection{Repairing Strategy using Constraint Evaluation}
 \label{subsec:repairingStrategyConstraint}
+
+The patching is evaluated in two ways, static and dynamic. We evaluated those
+conditions which can be evaluated safely during compile time. Such constraints
+have constants like \texttt{if(s.length<10)}. We looked for particular
+constraints based on our storage specification 
