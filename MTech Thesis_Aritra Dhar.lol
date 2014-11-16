@@ -8,5 +8,6 @@
 \contentsline {lstlisting}{\numberline {8.3}arithmetic exception : division-by-zero patching}{30}{lstlisting.8.3}
 \contentsline {lstlisting}{\numberline {8.4}appropriate constructor}{31}{lstlisting.8.4}
 \contentsline {lstlisting}{\numberline {8.5}array null pointer exception}{32}{lstlisting.8.5}
-\contentsline {lstlisting}{\numberline {9.1}Same method calling in different scenario}{38}{lstlisting.9.1}
-\contentsline {lstlisting}{\numberline {9.2}Mehod name modification for different calling context}{38}{lstlisting.9.2}
+\contentsline {lstlisting}{\numberline {9.1}Code requiring dynamic string constraint evaluation.}{39}{lstlisting.9.1}
+\contentsline {lstlisting}{\numberline {9.2}Dynamic constraint collection and evaluation corresponding to code \ref {snippet:exCode1}.}{40}{lstlisting.9.2}
+\contentsline {lstlisting}{\numberline {9.3}Example of parameter tweaking.}{41}{lstlisting.9.3}
