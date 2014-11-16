@@ -34,9 +34,8 @@ overhead in case of failures.
 \section{Design}
 \label{sec:tool:design}
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=.5]{images/NewDesignDiagram.pdf}
+\begin{figure}[t] \centering
+\includegraphics[scale=.6]{images/NewDesignDiagram.pdf}
 \caption{\tool\ workflow.}
 \label{fig:overallDesign}
 \end{figure}
@@ -60,6 +59,14 @@ during normal program execution.
 
 \subsection{Precise Identification of Instrumentation Points: }
 \label{sec:tool:stage1}
+
+\begin{figure}[t] \centering
+\includegraphics[scale=.5]{images/PatchModule.pdf}
+\caption{\tool\ Patch module flow diagram}
+\label{fig:overallDesign}
+\end{figure}
+
+
 
 In this stage, \tool\ leverages a combination of program analyses to accurately
 determine the minimum set of points of interest where instrumentation is
@@ -272,7 +279,7 @@ hybrid approach.
 \label{algo:constraintCollection}
 \end{algorithm}
 
-\begin{enumarate}
+\begin{itemize}
 
  \item \textbf{Static constraint collection}: \tool's static constraint
 collection phase identifies all declarative constraints.
@@ -333,6 +340,8 @@ potential safe values of the string object under consideration. However, there
 are scenarios, where there are potentially conflicting constraints or no
 permissible values of the constraints can be calculated statically.
 
+\end{itemize}
+
 \lstset{language=Java, caption=Code requiring dynamic string constraint
 evaluation., label =
 snippet:exCode1, firstnumber =1}
@@ -370,7 +379,8 @@ consideration. Thus, \tool\ will insert Code~\ref{snippet:exCode2} before line
 $4$ in Code~\ref{snippet:exCode1} to update and evaluate the set of constraints
 on string \code{st}.
 
-\end{enumarate}
+
+
 
 \subsection{Code generation}
 \label{sec:tool:stage2:generation}
@@ -501,7 +511,7 @@ transition and $safe \rightarrow error$ corresponds to the constraint violation.
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=.25]{images/automataString.pdf}
+\includegraphics[scale=.4]{images/automataString.pdf}
 \caption{Partial constraint representation model.}
 \label{fig:constraintautomata}
 \end{figure}

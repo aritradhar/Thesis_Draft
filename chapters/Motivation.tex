@@ -2,6 +2,195 @@
 \chapter{Motivation and Challenges}
 \label{chapter:motivation}
 
+Ensuring correctness of a program is an undecidable problem. In order to achieve
+high scalability static analysis works by making sound approximations, which
+typically lead to numerous false positives. Complex programming logic and data
+coming from diverse sources make the problem worse. As a result, successful
+execution of a real application can never be guaranteed, and unexpected failures
+may happen. These failures often result in runtime exceptions being thrown by
+the applications that are generally not handled. The cost of these runtime
+failures can vary depending on the criticality of the applications and can be
+very high for mission-critical applications.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Runtime Exception Type} & \textbf{Occurrences} & \textbf{Percentage}\\
+\hline 
+
+\code{NullPointerException} & $34912$ & $54.94\%$ \\ 
+
+\code{ClassCastException} & $7504$ & $11.81\%$ \\ 
+
+\code{IndexOutOfBoundsException} & $6637$ & $10.44\%$ \\ 
+
+\code{SecurityException}  & $5818$ & $9.15\%$ \\  
+
+\code{NoSuchElementException} & $2392$ & $3.76\%$ \\ 
+
+\code{ArithmeticException} & $2338$ & $3.67\%$ \\ 
+
+\code{ConcurrentModificationExceptio} & $1889$ & $2.97\%$ \\ 
+
+\code{DOMException} & $1024$ & $1.61\%$ \\ 
+
+\code{ArrayStoreException} & $279$ & $0.43\%$ \\ 
+
+\code{MissingResourceException} & $277$ & $0.43\%$ \\ 
+
+\code{BufferOverFlowException} & $161$ & $0.25\%$ \\ 
+
+\code{NegativeArraySizeException} & $122$ & $0.19\%$ \\ 
+
+\code{BufferUnderFlowException} & $66$ & $0.1\%$ \\ 
+
+\code{LSException} & $64$ &  $0.1\%$ \\ 
+
+\code{MalformedParameterizedTypeExce} & $38$ & $0.05\%$ \\ 
+
+\code{CMMException}  & $8$ & $0.01\%$ \\ 
+
+\code{FileSystemNotFoundException} & $6$ & $0.009\%$ \\ 
+
+\code{NoSuchMechanismException} & $3$ & $0.0045\%$ \\ 
+
+\code{MirroredTypesException} & $1$ & $0.0015\%$ \\ 
+
+\hline
+
+\end{tabular}
+\caption{Prominent runtime exceptions from
+\texttt{stackoverflow}~\cite{stackoverflow}.}
+\label{tab:stackoverlow}
+\end{table}
+
+\java\ applications are typically built using libraries, and \code{String} APIs
+are commonly used in third party libraries. Common and diverse usage of strings
+in programs is a significant source of errors. We mined the repository of posts
+on \texttt{stackoverflow}~\cite{stackoverflow} to understand common types of
+exceptions thrown in case of failures. Table~\ref{tab:stackoverlow} lists the
+most prominent exceptions with the share of higher than $5\%$. The second column
+indicates the types of exceptions, whereas the third column indicates their
+overall percentage share. We observe that strings can play a role in generating
+all except \code{SecurityException}. This result coupled with the potentially
+heavy cost of program crashes motivated us to develop a hybrid technique for
+automatic repairing of \java\ programs for failures related to \code{String}
+APIs.
+
+\section{Overview}
+\label{subsec:overview}
+
+\lstset{language=Java, caption=Snippet from \code{fileUtils} class of Apache
+Commons library. , label = snippet:exampleRepairing2}
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+public static String getPathNoEndSeparator
+        (String filename) {
+  return doGetPath(filename, 0);
+}
+private static String doGetPath
+        (String filename, int separatorAdd) {
+  if(filename == null) return null;
+  int prefix = getPrefixLength(filename);
+  if (prefix < 0) return null;
+  int index = indexOfLastSeparator(filename);
+  if ((prefix >= filename.length()) || (index < 0))
+        return "";
+  return filename.substring(prefix,
+        index + separatorAdd);
+}
+\end{lstlisting}
+\end{figure}
+
+Code~\ref{snippet:exampleRepairing2} corresponds to methods from from
+\code{fileUtils} class of Apache Common IO library. The method
+\code{getPathNoEndSeparator()} throws a \code{StringIndexOutOfBounds} exception
+on Windows OS, which originates from statement \code{return
+filename.substring(prefix, index + separatorAdd)} on line 13 when the method is
+called with parameter \code{"/foo.xml"}.  Here, the value of \code{prefix} as
+returned by the method \code{getPrefixLength} is 1. It fails to satisfy the
+constraint implied by the program condition \code{prefix <= index +
+separatorAdd} for \code{substring} method which  ensures that \code{beginIndex}
+cannot be greater than \code{endIndex}. As a result, the exception being thrown.
+
+
+\lstset{language=Java, caption=Patch for \code{fileUtils} class
+from Apache Commons library bug., label = snippet:exampleRepairing3, firstnumber
+=13}
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+String temp = null;
+try {
+  temp = filename.substring(prefix, index + separatorAdd);
+} catch(IndexOutOfBoundsException ex) {
+  int length = filename.length;
+  int t = index + separatorAdd;
+  temp = filename.substring(
+    getStart(prefix,t,length), getEnd(prefix,t,length));
+}
+return temp;
+\end{lstlisting}
+\end{figure}
+
+A closer inspection of this code snippet shows that the string variable
+\code{filename} invokes two methods, namely \code{length} and \code{substring}
+on lines 11 and 13 respectively. \java\ \code{String} API documentation
+specifies that \code{length} does not throw any runtime exceptions. The only
+exception that this invoke statement can throw is when the receiver object
+referenced by \code{filename} is \code{null}. However, the check on line 7
+indicates that this situation would not arise. However, method \code{substring}
+can throw \code{IndexOutOfBoundsException} exception that can potentially crash
+the program. A good patch to handle this failure should take into account all of
+these observations. 
+
+Code~\ref{snippet:exampleRepairing3} presents the patch automatically generated
+by \tool . This patch replaces the invoke statement on line 13 in
+Code~\ref{snippet:exampleRepairing2}. The invoke statement is now wrapped inside
+the \code{try} block and a \code{catch} corresponding to
+\code{IndexOutOfBoundsException} is added on line 15. This ensures that
+control passes to the catch block only when the exception is thrown. Line 20
+shows two method calls namely \code{getStart} and \code{getEnd} that are
+inserted by \tool. These methods, using the knowledge about the length of
+\code{filename} acquired with the help of the code on line 17, compute legally
+correct indexes required by \code{substring} method to satisfy the constraint
+related to \code{beginIndex} and \code{endIndex}. Method \code{substring} now
+can regenerate the substring ensuring that the method call would not fail. 
+
+The actual patch provided by the developers is semantically similar to the one
+developed by \tool\ and both versions of the program generate exactly the same
+output. Similarly, the patch developed by \tool\ for the bug depicted in
+Code~\ref{snippet:exampleRepairing1} is semantically similar to the actual one
+provided by the developers and is presented in
+Code~\ref{snippet:exampleRepairing4}. Here the object referenced by the string
+variable \code{temp} is regenerated after adjusting the offset and ensuring that
+the constraint represented by the program condition \code{offset <= length}
+would never be violated.
+
+
+\lstset{language=java, caption=Patch for the Apache Log4j bug.,
+label = snippet:exampleRepairing4, firstnumber =4}
+\begin{figure}[t]
+\centering
+\begin{lstlisting}
+try {
+    temp = new String(chars, offset, length);
+} catch(StringIndexOutOfBoundsException ex) {
+    int i = chars.length;
+    temp = new String(chars,
+        IndexRepair.getStart(offset, length, i),
+            IndexRepair.getEnd(offset, length, i));
+}
+priorVariables.add(temp);
+\end{lstlisting}
+\end{figure}
+
+We next present in detail the techniques and the algorithms used in our analysis
+that can produce patches to regenerate string variables under more complex
+scenarios. Our study presented in \xref{chapter:results} suggests that majority
+of the string generation scenarios in practice are less complex.
 
 \section{Historical Context}
 \label{section:historicalContext}
@@ -39,86 +228,9 @@ critical that in case of failure one can not simple shutdown and restart the
 system like general client applications as it may results in loss of human lives
 and massive amount of money.
 
-\section{Data from Stack Overflow Posts}
-\label{section:stackoverflow}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Runtime Exception Type} & \textbf{Occurrences} & \textbf{Percentage}\\
-\hline NullPointerException & $34912$ & $54.94\%$ \\ \hline
-
-ClassCastException & $7504$ & $11.81\%$ \\ \hline
-
-IndexOutOfBoundsException & $6637$ & $10.44\%$ \\ \hline
-
-SecurityException  & $5818$ & $9.15\%$ \\  \hline
-
-NoSuchElementException & $2392$ & $3.76\%$ \\ \hline
-
-ArithmeticException & $2338$ & $3.67\%$ \\ \hline
-
-ConcurrentModificationExceptio & $1889$ & $2.97\%$ \\ \hline
-
-DOMException & $1024$ & $1.61\%$ \\ \hline
-
-ArrayStoreException & $279$ & $0.43\%$ \\ \hline
-
-MissingResourceException & $277$ & $0.43\%$ \\ \hline
-
-BufferOverFlowException & $161$ & $0.25\%$ \\ \hline
-
-NegativeArraySizeException & $122$ & $0.19\%$ \\ \hline
-
-BufferUnderFlowException & $66$ & $0.1\%$ \\ \hline
-
-LSException & $64$ &  $0.1\%$ \\ \hline
-
-MalformedParameterizedTypeExce & $38$ & $0.05\%$ \\ \hline
-
-CMMException  & $8$ & $0.01\%$ \\ \hline
-
-FileSystemNotFoundException & $6$ & $0.009\%$ \\ \hline
-
-NoSuchMechanismException & $3$ & $0.0045\%$ \\ \hline
-
-MirroredTypesException & $1$ & $0.0015\%$ \\ \hline
-
-\end{tabular}
-\caption{Most frequent java runtime exceptions from stack overflow data}
-\label{tab:stackoverlow}
-\end{table}
-
-We have analyzed data from stack overflow and we looked for java runtime
-exception which are discussed most frequently. In the
-table~\ref{tab:stackoverlow}, the data we find is tabulated along with their
-occurrences and percentages.
 
 
-From the table it is clear that null pointer exception in java is not only the
-most frequent but also the most dominant runtime exception having share of more
-than $50\%$. This data is highly motivational for us as there are number of
-cases where Java developers encounters software bugs which are mostly based on
-runtime exception.
 
-\section{Major Challenges}
-\label{section:challenges}
 
-The challenges we faced during the research can be described in few points :
-
-\begin{enumerate}
-  \item The major challenge was that the program we try to patch, in all the
-  cases we actually don't know the internal logic of the program, we have
-  patched it based on its behavior which can be damaging to the system itself.
-  To prevent this we have tainted input variables which are coming from out side
-  environment and see how they are interacting with other variables and object
-  in the program. In case any of these variables go outside of the system, we
-  marked the path to make sure patch won't be applied along that path.
-  
-  \item Most of the patching are non-trivial in nature and adaptive based on the
-  use case to take full advantages what resources available in the code rather
-  than some deterministic patching technique.
-\end{enumerate}
 
 
