@@ -19,6 +19,20 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
+\usepackage[bookmarks=true,%
+bookmarksnumbered=true,%
+colorlinks=true,%
+linkcolor=linkcol,%
+citecolor=citecol,%
+urlcolor=urlcol,%
+hypertexnames=true,%
+pdfpagelabels,
+]{hyperref}
+
+\definecolor{linkcol}{rgb}{0,0,1}
+\definecolor{citecol}{rgb}{0,0.5,0}
+\definecolor{urlcol}{rgb}{0.3,0,0}
+
 
 \hyphenpenalty 10000
 \exhyphenpenalty 10000
@@ -33,6 +47,27 @@
 %\usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{subcaption}
+
+\newcommand{\code}[1]{\texttt{\scriptsize{#1}}}
+\newcommand{\mycomment}[1]{}
+\newcommand{\todo}[1]{\textbf{TODO: #1}}
+\newcommand{\mytab}{~~~~}
+\newcommand{\sspace}{~}
+\newcommand{\etal}{\textit{et al.}}
+\newcommand{\eg}{{e.g.,}}
+\newcommand{\ie}{{i.e.,}}
+\newcommand{\lno}[1]{{\tiny{\textbf{(#1)~~}}}}
+
+\def\tool{\textsc{Clotho}\xspace}
+
+\newcommand{\java}{\textsc{Java}}
+\newcommand{\soot}{\textsc{Soot}}
+\newcommand{\infoflow}{\textsc{InfoFlow}}
+\newcommand{\sdn}{{SDN}}
+\newcommand{\verifier}{\textsc{Verifier}}
+\newcommand{\validator}{\textsc{Flow\_Consistency\_ Validator}}
+\newcommand{\outputs}{{\mathbb O}}
+\newcommand{\stream}{{\mathbb S}}
 
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -103,14 +138,14 @@ Program Analysis, Static Analysis, Exception
 \onehalfspacing
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Certificate
-\include{Certificate}
+\include{chapters/Certificate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \doublespacing
 %Abstract
-\include{Abstract}
+\include{chapters/Abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
@@ -120,7 +155,7 @@ Program Analysis, Static Analysis, Exception
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Acknowledgments
-\include{Acknowledgments}
+\include{chapters/Acknowledgments}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
@@ -153,58 +188,63 @@ Program Analysis, Static Analysis, Exception
 %\pagestyle{fancy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Introduction
-\include{Introduction}
+\include{chapters/Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Motivation and Challenges
-\include{Motivation}
+\include{chapters/Motivation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Related Works
-\include{RelatedWorks}
+\include{chapters/RelatedWorks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Problem Formulation
-\include{ProblemFormulation}
+\include{chapters/ProblemFormulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CallGraph consruction
-\include{TaintAnalysis}
+\include{chapters/TaintAnalysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Repairing Strategy
-\include{RepairingStrategy}
+\include{chapters/RepairingStrategy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Bounded Analysis
-\include{BoundedAnalysis}
+\include{chapters/BoundedAnalysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Constraint Automata
-\include{ConstraintAutomata}
+\include{chapters/ConstraintAutomata}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Design of the System
-\include{Design}
+\include{chapters/Design}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Implementation
+\include{chapters/Implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Benchmark Results
-\include{Results}
+\include{chapters/Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Conclusion and Future Works
-\include{ConclusionFutureWorks}
+\include{chapters/ConclusionFutureWorks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \onehalfspacing
