@@ -7,13 +7,13 @@ Modern software applications are large and complex. In addition, they run in
 diverse environments and get inputs from variety of data sources. As a result,
 predicting safe behavior for them at runtime can be difficult.
 Moreover, giving assurances about the quality of service becomes practically
-impossible when the applications are developed using third party
-libraries and components. Such applications often exhibit vulnerabilities that
-can be exploited by providing malicious inputs. In addition, diverse data sources
-and complex constraints on them make it challenging for programmers to ensure
-that all data elements are correctly validated and processed. Any deficiencies
-in this process makes applications prone to failures. Such defects can be hard
-to detect at the compilation-time, and irrespective of the validation techniques
+impossible when the applications are developed using third party libraries and
+components. Such applications often exhibit vulnerabilities that can be
+exploited by providing malicious inputs. In addition, diverse data sources and
+complex constraints on them make it challenging for programmers to ensure that
+all data elements are correctly validated and processed. Any deficiencies in
+this process makes applications prone to failures. Such defects can be hard to
+detect at the compilation-time, and irrespective of the validation techniques
 used, some of them may go undetected and exist in the applications even when the
 applications are in production.
 
@@ -29,15 +29,14 @@ customer. Such unpleasant experiences might result in customers moving to other
 online stores making an adverse impact on the business. Similarly, a software
 company launching a new product would expect it to be stable while the product
 is undergoing beta-testing. Any crashes occurring at that time would result in
-negative feedback from the users and loss in the business. To make the matter worse, these
-failures may occur in software components that do not possess critical
-functionality, and hence, may even get less attention to their quality at the
-time of development. Nevertheless, irrespective of the criticality of these
-components, if the crash occurs it is equally undesirable.
+negative feedback from the users and loss in the business. To make the matter
+worse, these failures may occur in software components that do not possess
+critical functionality, and hence, may even get less attention to their quality
+at the time of development. Nevertheless, irrespective of the criticality of
+these components, if the crash occurs it is equally undesirable.
 
 \lstset{language=Java , caption=Apache Log4j bug example.,
-label=snippet:exampleRepairing1}
-\begin{figure}[t]
+label=snippet:exampleRepairing1} \begin{figure}[t]
 \begin{lstlisting}
 private int substitute() {
   if (priorVariables == null) {
@@ -109,8 +108,8 @@ program from crashing ensuring its acceptable behavior.
 % and effectively generates program patches to handle string-related errors
 % \cite{}.
 
-\item We use a finite state machine (FSM) as a formalism (\xref{sec:design}) to
-describe the behavior of \java\ \code{String} API, and apply it to drive the
+\item We use a finite state machine (FSM) as a formalism (\xref{chapter:design})
+to describe the behavior of \java\ \code{String} API, and apply it to drive the
 generation of exception-specific patches.
 
 \item We applied \tool\ to several hugely popular open-source libraries to patch
@@ -139,5 +138,7 @@ the future versions.
 % future work.
 
 We have made our source code and data sets available to the open source
-community at \url{http://goo.gl/d1zcXD}.
+community at \url{http://goo.gl/d1zcXD}. Github development repository is
+located at \url{https://github.com/aritradhar/CLOTHO} and
+\url{https://github.com/aritradhar/CLOTHO-TaintAnalysis}.
 

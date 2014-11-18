@@ -12,7 +12,7 @@ the applications that are generally not handled. The cost of these runtime
 failures can vary depending on the criticality of the applications and can be
 very high for mission-critical applications.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
@@ -20,43 +20,42 @@ very high for mission-critical applications.
 \hline 
 
 \code{NullPointerException} & $34912$ & $54.94\%$ \\ 
-
+\hline
 \code{ClassCastException} & $7504$ & $11.81\%$ \\ 
-
+\hline
 \code{IndexOutOfBoundsException} & $6637$ & $10.44\%$ \\ 
-
+\hline
 \code{SecurityException}  & $5818$ & $9.15\%$ \\  
-
+\hline
 \code{NoSuchElementException} & $2392$ & $3.76\%$ \\ 
-
+\hline
 \code{ArithmeticException} & $2338$ & $3.67\%$ \\ 
-
+\hline
 \code{ConcurrentModificationExceptio} & $1889$ & $2.97\%$ \\ 
-
+\hline
 \code{DOMException} & $1024$ & $1.61\%$ \\ 
-
+\hline
 \code{ArrayStoreException} & $279$ & $0.43\%$ \\ 
-
+\hline
 \code{MissingResourceException} & $277$ & $0.43\%$ \\ 
-
+\hline
 \code{BufferOverFlowException} & $161$ & $0.25\%$ \\ 
-
+\hline
 \code{NegativeArraySizeException} & $122$ & $0.19\%$ \\ 
-
+\hline
 \code{BufferUnderFlowException} & $66$ & $0.1\%$ \\ 
-
+\hline
 \code{LSException} & $64$ &  $0.1\%$ \\ 
-
+\hline
 \code{MalformedParameterizedTypeExce} & $38$ & $0.05\%$ \\ 
-
+\hline
 \code{CMMException}  & $8$ & $0.01\%$ \\ 
-
+\hline
 \code{FileSystemNotFoundException} & $6$ & $0.009\%$ \\ 
-
+\hline
 \code{NoSuchMechanismException} & $3$ & $0.0045\%$ \\ 
-
+\hline
 \code{MirroredTypesException} & $1$ & $0.0015\%$ \\ 
-
 \hline
 
 \end{tabular}
@@ -202,13 +201,14 @@ of some very common runtime exceptions.
 \begin{itemize}
   
   \item In USS Yorktown, complete failure in propulsion and navigation system by
-  a simple divide-by-zero exception in flight deck database (1998)~\cite{Ship}.
+  a simple divide-by-zero exception in flight deck database
+  ($1998$)~\cite{Ship}.
   
   \item AT\&T telephone network failure causing by one faulty switch causing ATC
   commutation blackout.
   
-  \item Air-Traffic Control System in LA Airport lost communication with all 400
-  airplanes caused by a system crash triggered by integer (32bit)
+  \item Air-Traffic Control System in LA Airport lost communication with all
+  $400$ airplanes caused by a system crash triggered by $32$ bit integer
   overflow~\cite{LAATC}.
   
   \item Mars rover curiosity B-side computer memory overflow causing OS suspend
@@ -222,11 +222,11 @@ of some very common runtime exceptions.
   
 \end{itemize}
 
-All of these incidents have one thing common, all of them were critical system
+All of these incidents have one thing common, all of them were critical systems
 where availability is the major requirement. Most of the systems are such
 critical that in case of failure one can not simple shutdown and restart the
 system like general client applications as it may results in loss of human lives
-and massive amount of money.
+and/or massive amount of money.
 
 
 

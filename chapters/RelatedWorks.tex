@@ -10,8 +10,8 @@ Automated data-structure repairing techniques are there in the litarature for a
 while. In the papers~\cite{conf/oopsla/DemskyR03},
 \cite{Demsky03automaticdata},~\cite{conf/icse/DemskyR05},
 \cite{conf/issre/DemskyR03},~\cite{conf/issta/DemskyEGMPR06} the
-authors mostly concentrated on specific data-structures like \emph{FAT-32},
-\emph{ext2}, \emph{CTAS} (a set of air-traffic control tools developed at the
+authors mostly concentrated on specific data-structures like \code{FAT-32},
+\code{ext2}, \code{CTAS} (a set of air-traffic control tools developed at the
 NASA Ames research center) and repairing them. The authors represented a
 specification language by which they able to see consistency property these
 data-structure. Given the specification, they able to detect the inconsistency
@@ -39,13 +39,13 @@ which they used Daikon~\cite{DBLP:journals/scp/ErnstPGMPTX07}. They mostly
 patched security vulnerabilities by some candidate repair patches.
 
 Fan Lon et al in their paper~\cite{conf/pldi/LongSR14} presented their new
-system \emph{RCV} which recovers applications from divide-by-zero and
-null-deference error. Their tool replaces \emph{SIGFPE} and \emph{SIGSEGV}
+system \code{RCV} which recovers applications from divide-by-zero and
+null-deference error. Their tool replaces \code{SIGFPE} and \code{SIGSEGV}
 signal handler with its own handler. The approach simply works by assigning
 zero at the time of divide-by-zero error, read zero and ignores write at the time
 of null-deference error. Their implementation was on $x86$ and $x86-64$
 binaries and they also implemented a dynamic taint analysis to see the effect of their
-patching until the program stabilizes which they called as \emph{error
+patching until the program stabilizes which they called as \code{error
 shepherding}.
 
 \section{Genetic Programming, Evolutionary Computation}

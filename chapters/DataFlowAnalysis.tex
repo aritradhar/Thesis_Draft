@@ -45,13 +45,13 @@ String foo(String s)
 
 \end{lstlisting}
 
-Let us assume that our target is \texttt{s.substring(a,b)} which in this case
+Let us assume that our target is \code{s.substring(a,b)} which in this case
 may throw an array index out of bound exception. In this target statement,
-\texttt{a} and \texttt{b} are used variable which are dependent on another
-String API method i.e \texttt{indexOf()} which calculates index of starting of a
+\code{a} and \code{b} are used variable which are dependent on another
+String API method i.e \code{indexOf()} which calculates index of starting of a
 sub-string or single character in the main string. In case the sub-string or the
-character does not exist in the main string, \texttt{indexOf()} method returns
-$-1$ which causes throwing a runtime exception in the \texttt{substring()}
+character does not exist in the main string, \code{indexOf()} method returns
+$-1$ which causes throwing a runtime exception in the \code{substring()}
 method call.
 \newline
 By using dataflow analysis we try to understand how these different variables
@@ -76,8 +76,8 @@ of such analysis.
 
 Let us define $P_i$ as a program point/ node in the control flow graph. $in(P)$
 and $out(P_i)$ respectively denotes in set and out set to and from the node $P$.
-We define set $IG$ as the set of methods like \texttt{indexOf()},
-\texttt{codePointAt()}, \texttt{CodePointBefore()} etc. which returns an integer
+We define set $IG$ as the set of methods like \code{indexOf()},
+\code{codePointAt()}, \code{CodePointBefore()} etc. which returns an integer
 which can be used as input to other String methods. We also define set $IU$
 which contains the methods which may use the integers produced by the methods in
 $IG$ Then, 
@@ -91,11 +91,11 @@ We have defined $Def(P_i)$ set as the set of variables and objects which are
 defined or redefined in the program point $P_i$. The set $Used(P_i)$ is also a
 set of variables and objects which are used in the program point $P_i$.
 
-\textbf{Example : } Consider the program statement \texttt{Pi : int a = b.fun(c
+\textbf{Example : } Consider the program statement \code{Pi : int a = b.fun(c
 d)}.
-Here the variable \texttt{a} is initialized, so $Def(P_i)$ = \texttt{\{a\}} and
+Here the variable \code{a} is initialized, so $Def(P_i)$ = \code{\{a\}} and
 as
-\texttt{b, c, d} are used, $Used(P_i) =$ \texttt{\{b, c, d\}}
+\code{b, c, d} are used, $Used(P_i) =$ \code{\{b, c, d\}}
 
 In the figure~\ref{fig:dataflow}, we gave an example of a sample CFG with in set
 and out set.
