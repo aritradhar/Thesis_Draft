@@ -545,7 +545,7 @@ control flow of the program.
 
 We measure the extent of this optimization, which prevents disruption of the
 control flow using the \textbf{Flow Consistency Index (FCI)} that is calculated
-as $FCI = n$, where $n$ is the number of exceptions in the application that
+as $$FCI = n$$, where $n$ is the number of exceptions in the application that
 must be ignored \tool\ for forced patching of the bug. Note that $FCI \ge 0$,
 and a lower value of $FCI$ is desirable. We observe that patching four bugs
 required \tool\ to ignore at most one exception; rest required no changes.
@@ -569,7 +569,7 @@ solvers can easily be integrated.
 % easily replace it with a third party solver.
 Specifically, cascaded exceptions may arise if the patch generates \code{String}
 objects that represent a malformed string. Further, if we keep the optimization
-in \xref{subsubsec:minimizePatchInstrumentation}, then cascaded failures may
+in \xref{subsec:minimizePatchInstrumentation}, then cascaded failures may
 occur even for subsequent \code{String} APIs handling the malformed
 string following the point of patching. If the optimization is turned
 off, \tool\ will automatically patch all relevant \code{String} APIs and thus

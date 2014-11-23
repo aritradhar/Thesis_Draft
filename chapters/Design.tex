@@ -464,7 +464,7 @@ the mechanism to correctly set the parameters for the offending string API.
 
 \end{enumerate}
 
-\subsubsection{Instrumentation: }
+\subsection{Instrumentation: }
 \label{sec:tool:stage3}
 
 \tool\ embeds the repair in a \code{try-catch} ladder to ensure that the patches
@@ -491,6 +491,14 @@ apply it to drive the generation of exception-specific \code{catch} blocks. The
 model is precomputed based on the API documentation of \java\ \code{Strings}.
 Formally, we define the constraint representation FSM model $(Q, \Sigma, \delta,
 q_0, F)$ as follows:
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=.4]{images/automata.pdf}
+\caption{Partial constraint representation model : general structure.}
+\label{fig:constraintautomata}
+\end{figure}
+
 \begin{mybullet}
  \item $Q$: Set of states where $|Q| = 2$, \emph{legal state}(safe) and
 \emph{illegal state} (error).

@@ -127,52 +127,21 @@ the methods which throws runtime exception. We do forward pass to see if there
 is any invocation of such methods and if we find any we then cross check it
 with the results we got from the taint analysis. We also see if there is already
 some exception handling mechanism provided by the developer using the technique
-described in Section~\ref{subsec:callChainLookUp}. We detected such method calls
-and wrap them in try-catch block. In the catch block we place the appropriate
+described in~\xref{sec:optimizations}. We detected such method
+calls and wrap them in try-catch block. In the catch block we place the appropriate
 exception type as provided by \java\ SE API documentation.
 
 \subsection{Catch Block Instrumentation}
 \label{sub:catchInstrumentation}
 
-In this phase we instrument appropiate patching codes inside the catch block.
-We used the static constraint evaluation of
-Section~\ref{subsubsec:staticConstraint} to statically evaluate the string. In
-cases there are more constraints which can't be solved statically, it would instrument
-necessary method call so that the constraints would populate and get solved in runtime
-~\ref{subsubsec:dynamicConstraint}. In case there is no constraint, we repair the
-string in the method calls like \code{substrring}, \code{subSequence}, \code{charAt} etc.
-which are dependent on the index arguments. In those cases we used
-Algorithm~\ref{algo:stringPatchParametr} to repair them.
+Catch block instrumentation is done by using \code{Trap} class in \soot. In \jimple\
+representation, exception handling is represented by \code{Trap} class which have
+start \code{Unit}, end \code{Unit} which denotes the starting and ending \code{Unit}s
+in the \code{try} block. To localize the instrumentation, we took a \jimple
+statement and put in to a new \code{Trap} object and put appropriate patching
+\code{Unit}s in the catch block.
 
 
-\begin{algorithm}
-\scriptsize
-\DontPrintSemicolon
-\KwData{String object $Str$ and index set $IS$ which contains ${i}$ or
-${i,j}$.}
-\KwResult{Repaired index set containing ${Ri}$ or ${Ri,Rj}$ based on input $IS$}
-\Begin
-{
-	$Length \longleftarrow$ length of $Str$\;
-	\If{$Length == 0$} {
-		$Ri, Rj \longleftarrow 0$\;
-	} \Else {
-		\If{$i \textgreater j$} {
-			$Ri \longleftarrow j - 1$;
-		}
-		\If{$i \textgreater Lengrh$ \bf{OR} $j \textgreater Lengrh$} {
-			$Ri \longleftarrow Length - 1$ or $Rj \longleftarrow Length - 1$ based on
-			condition\;
-		}
-		\If{$i \textless 0$ \bf{OR} $j \textless 0h$} {
-			$Ri \longleftarrow 0$ or $Rj \longleftarrow 0$ based on
-			condition\;
-		}
-	}
-}
-\caption{String patching based on parameters passed}
-\label{algo:stringPatchParametr}
-\end{algorithm}
 
 \section{Optimizations}
 \label{sec:optimizations}
@@ -190,8 +159,8 @@ of the patches.
 % articular
 %  \code{Unit} was handled.
 
-\subsubsection{Minimize constraint analysis: }
-\label{subsubsec:minimizeConstrintInstrumentation}
+\subsection{Minimize constraint analysis: }
+\label{subsec:minimizeConstrintInstrumentation}
 %
 \tool\ collects constraints only for those string literals that may be involved
 in a runtime exception. For example, if a string object does not involve API
@@ -216,8 +185,8 @@ statements analyzed for instrumentation.
 % \code{System.err.print()}. We only consider the conditional expressions in the
 % branches having no exception or error path.
 
-\subsubsection{Minimize patch instrumentation: }
-\label{subsubsec:minimizePatchInstrumentation}
+\subsection{Minimize patch instrumentation: }
+\label{subsec:minimizePatchInstrumentation}
 % 
 \tool\ makes a forward pass over all bytecodes to determine if a specific string
 object is modified after it has been patched. If the object is not modified then
@@ -226,4 +195,4 @@ required, since the constraint would have been satisfied in the beginning and it
 as long as the variable is not changed. Similarly, when the API usage is same and none of 
 the method parameters are changed, no further patching would be required. This reduces the 
 total number of possible
-instrumentations required. 
+instrumentation required. 
